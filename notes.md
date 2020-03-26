@@ -41,3 +41,30 @@ Large maring is only achieved when C is large.
 Data is linearly spearable when a straight line can separate the positive and negative examples.
 
 If we have outliers that we dont want to affect the decision boundry with, we can reduce C.
+
+## KERNELS
+
+Given x compute new feature depending on proximity to landmarks l1, l2, l3 ...<br />
+To do this. we find the similarity of x and some landmark li.<br /> 
+**Gaussian Kernel:**
+
+$f_i = similarity(x, l^{(i)}) = \exp(-\dfrac{||x - l^{(i)}||^2}{2\sigma^2})$
+
+$f_i = similarity(x, l^{(i)}) = \exp(-\dfrac{\sum^n_{j=1}(x_j-l_j^{(i)})^2}{2\sigma^2})$
+
+properties:
+if x very near li then fi = 1 (close to 1)
+if x is far from li then fi = 0 (close to 0)
+
+Each feature gives us the features in our hypothesis
+
+$h_\theta(x) = \theta_1f_1+\theta_2f_2 +\theta_3f_3 + ...$
+
+$\sigma^2$ - parameter of gaussian kernel, can be modified to increase or decrease drop off of our feature fi.
+
+**How to choose landmarks**<br />
+one way is to put them is exact same locations as all the training examples. This gives us m landmarks. One per example.<br />
+vertical vector: 
+$x^{(i)} \rightarrow \begin{bmatrix}f_1^{(i)} = similarity(x^{(i)}, l^{(1)}) \newline f_2^{(i)} = similarity(x^{(i)}, l^{(2)}) \newline\vdots \newline f_m^{(i)} = similarity(x^{(i)}, l^{(m)}) \newline\end{bmatrix}$
+
+now to get theta we can use svm minimaztion but with fi substituted in for xi
